@@ -59,7 +59,7 @@ export default StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 36
+    height: 32
   },
   bannerLabel: {
     ...Fonts.style.h5,

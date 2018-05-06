@@ -6,16 +6,17 @@ import { connect } from 'react-redux'
 import AppNavigation from './AppNavigation'
 
 class ReduxNavigation extends React.Component {
-  componentWillMount () {
+  // eslint-disable-next-line
+  UNSAFE_componentWillMount () {
     if (Platform.OS === 'ios') return
     BackHandler.addEventListener('hardwareBackPress', () => {
-      const { dispatch, nav } = this.props
+      const {dispatch, nav} = this.props
       // change to whatever is your first screen, otherwise unpredictable results may occur
       if (nav.routes.length === 1 && (nav.routes[0].routeName === 'LaunchScreen')) {
         return false
       }
       // if (shouldCloseApp(nav)) return false
-      dispatch({ type: 'Navigation/BACK' })
+      dispatch({type: 'Navigation/BACK'})
       return true
     })
   }
@@ -26,9 +27,13 @@ class ReduxNavigation extends React.Component {
   }
 
   render () {
-    return <AppNavigation navigation={addNavigationHelpers({ dispatch: this.props.dispatch, state: this.props.nav, addListener: createReduxBoundAddListener('root') })} />
+    return <AppNavigation navigation={addNavigationHelpers({
+      dispatch: this.props.dispatch,
+      state: this.props.nav,
+      addListener: createReduxBoundAddListener('root'),
+    })}/>
   }
 }
 
-const mapStateToProps = state => ({ nav: state.nav })
+const mapStateToProps = state => ({nav: state.nav})
 export default connect(mapStateToProps)(ReduxNavigation)

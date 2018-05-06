@@ -14,11 +14,11 @@ export function * startup (action) {
     // logging an object for better clarity
     console.tron.log({
       message: 'pass objects for better logging',
-      someGeneratorFunction: selectAvatar
+      someGeneratorFunction: selectAvatar,
     })
 
     // fully customized!
-    const subObject = { a: 1, b: [1, 2, 3], c: true }
+    const subObject = {a: 1, b: [1, 2, 3], c: true}
     subObject.circularDependency = subObject // osnap!
     console.tron.display({
       name: '🔥 IGNITE 🔥',
@@ -28,8 +28,8 @@ export function * startup (action) {
         subObject,
         someInlineFunction: () => true,
         someGeneratorFunction: startup,
-        someNormalFunction: selectAvatar
-      }
+        someNormalFunction: selectAvatar,
+      },
     })
   }
   const avatar = yield select(selectAvatar)

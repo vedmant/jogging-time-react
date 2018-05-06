@@ -1,4 +1,4 @@
-import { createReducer, createActions } from 'reduxsauce'
+import { createActions, createReducer } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 import { filter } from 'ramda'
 import { startsWith } from 'ramdasauce'
@@ -12,14 +12,14 @@ const LIST_DATA = ['sausage', 'blubber', 'pencil', 'cloud', 'moon', 'water', 'co
   'guitar', 'shaving', 'hair', 'soccer', 'water', 'racket', 'table', 'late', 'media', 'desktop', 'flipper',
   'club', 'flying', 'smooth', 'monster', 'purple', 'guardian', 'bold', 'hyperlink', 'presentation', 'world', 'national',
   'comment', 'element', 'magic', 'lion', 'sand', 'crust', 'toast', 'jam', 'hunter', 'forest', 'foraging',
-  'silently', 'tawesomated', 'joshing', 'pong', 'RANDOM', 'WORD'
+  'silently', 'tawesomated', 'joshing', 'pong', 'RANDOM', 'WORD',
 ]
 
 /* ------------- Types and Action Creators ------------- */
 
-const { Types, Creators } = createActions({
+const {Types, Creators} = createActions({
   search: ['searchTerm'],
-  cancelSearch: null
+  cancelSearch: null,
 })
 
 export const TemperatureTypes = Types
@@ -30,21 +30,16 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   searchTerm: '',
   searching: false,
-  results: LIST_DATA
+  results: LIST_DATA,
 })
 
 /* ------------- Reducers ------------- */
 
-export const performSearch = (state, { searchTerm }) => {
-  const results = filter(startsWith(searchTerm), LIST_DATA)
-  return state.merge({ searching: true, searchTerm, results })
-}
-
-export const cancelSearch = (state) => INITIAL_STATE
-
-/* ------------- Hookup Reducers To Types ------------- */
-
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SEARCH]: performSearch,
-  [Types.CANCEL_SEARCH]: cancelSearch
+  [Types.SEARCH]: (state, {searchTerm}) => {
+    const results = filter(startsWith(searchTerm), LIST_DATA)
+    return state.merge({searching: true, searchTerm, results})
+  },
+
+  [Types.CANCEL_SEARCH]: (state) => INITIAL_STATE,
 })

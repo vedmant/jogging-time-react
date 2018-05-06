@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "JoggingTimeReact-tvOS.app"
-               BlueprintName = "JoggingTimeReact-tvOS"
-               ReferencedContainer = "container:JoggingTimeReact.xcodeproj">
+               BuildableName = "JoggingTime-tvOS.app"
+               BlueprintName = "JoggingTime-tvOS"
+               ReferencedContainer = "container:JoggingTime.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "JoggingTimeReact-tvOSTests.xctest"
-               BlueprintName = "JoggingTimeReact-tvOSTests"
-               ReferencedContainer = "container:JoggingTimeReact.xcodeproj">
+               BuildableName = "JoggingTime-tvOSTests.xctest"
+               BlueprintName = "JoggingTime-tvOSTests"
+               ReferencedContainer = "container:JoggingTime.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "JoggingTimeReact-tvOSTests.xctest"
-               BlueprintName = "JoggingTimeReact-tvOSTests"
-               ReferencedContainer = "container:JoggingTimeReact.xcodeproj">
+               BuildableName = "JoggingTime-tvOSTests.xctest"
+               BlueprintName = "JoggingTime-tvOSTests"
+               ReferencedContainer = "container:JoggingTime.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "JoggingTimeReact-tvOS.app"
-            BlueprintName = "JoggingTimeReact-tvOS"
-            ReferencedContainer = "container:JoggingTimeReact.xcodeproj">
+            BuildableName = "JoggingTime-tvOS.app"
+            BlueprintName = "JoggingTime-tvOS"
+            ReferencedContainer = "container:JoggingTime.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "JoggingTimeReact-tvOS.app"
-            BlueprintName = "JoggingTimeReact-tvOS"
-            ReferencedContainer = "container:JoggingTimeReact.xcodeproj">
+            BuildableName = "JoggingTime-tvOS.app"
+            BlueprintName = "JoggingTime-tvOS"
+            ReferencedContainer = "container:JoggingTime.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "JoggingTimeReact-tvOS.app"
-            BlueprintName = "JoggingTimeReact-tvOS"
-            ReferencedContainer = "container:JoggingTimeReact.xcodeproj">
+            BuildableName = "JoggingTime-tvOS.app"
+            BlueprintName = "JoggingTime-tvOS"
+            ReferencedContainer = "container:JoggingTime.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

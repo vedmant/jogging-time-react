@@ -16,10 +16,10 @@ const updateReducers = (store: Object) => {
           name: 'PURGE',
           value: {
             'Old Version:': localVersion,
-            'New Version:': reducerVersion
+            'New Version:': reducerVersion,
           },
           preview: 'Reducer Version Change Detected',
-          important: true
+          important: true,
         })
       }
       // Purge store
@@ -34,4 +34,4 @@ const updateReducers = (store: Object) => {
   })
 }
 
-export default { updateReducers }
+export default {updateReducers}

@@ -8,7 +8,7 @@ import ReduxPersist from '../Config/ReduxPersist'
 export const reducers = combineReducers({
   nav: require('./NavigationRedux').reducer,
   github: require('./GithubRedux').reducer,
-  search: require('./SearchRedux').reducer
+  search: require('./SearchRedux').reducer,
 })
 
 export default () => {
@@ -19,7 +19,7 @@ export default () => {
     finalReducers = persistReducer(persistConfig, reducers)
   }
 
-  let { store, sagasManager, sagaMiddleware } = configureStore(finalReducers, rootSaga)
+  let {store, sagasManager, sagaMiddleware} = configureStore(finalReducers, rootSaga)
 
   if (module.hot) {
     module.hot.accept(() => {

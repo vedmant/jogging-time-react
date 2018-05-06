@@ -3,7 +3,7 @@ import { path } from 'ramda'
 import GithubActions from '../Redux/GithubRedux'
 
 export function * getUserAvatar (api, action) {
-  const { username } = action
+  const {username} = action
   // make the call to the api
   const response = yield call(api.getUser, username)
 
