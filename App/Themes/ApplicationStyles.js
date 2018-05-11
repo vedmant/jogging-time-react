@@ -9,7 +9,7 @@ const ApplicationStyles = {
   screen: {
     mainContainer: {
       flex: 1,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.background,
       paddingBottom: 30,
     },
     backgroundImage: {
@@ -22,21 +22,24 @@ const ApplicationStyles = {
     container: {
       flex: 1,
       paddingTop: Metrics.baseMargin,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.background,
     },
     section: {
       margin: Metrics.section,
       padding: Metrics.baseMargin,
     },
+    inputSection: {
+      margin: Metrics.section,
+    },
     sectionText: {
       ...Fonts.style.normal,
       paddingVertical: Metrics.doubleBaseMargin,
-      color: Colors.snow,
+      color: Colors.text,
       marginVertical: Metrics.smallMargin,
       textAlign: 'center',
     },
     subtitle: {
-      color: Colors.snow,
+      color: Colors.text,
       padding: Metrics.smallMargin,
       marginBottom: Metrics.smallMargin,
       marginHorizontal: Metrics.smallMargin,

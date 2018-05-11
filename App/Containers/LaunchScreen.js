@@ -5,29 +5,40 @@ import { Images } from '../Themes'
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 import Config from 'react-native-config'
+import RoundedButton from '../Components/RoundedButton'
+import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 
-export default class LaunchScreen extends Component {
+class LaunchScreen extends Component {
   render () {
     return (
       <View style={styles.mainContainer}>
-        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch'/>
         <ScrollView style={styles.container}>
-          <View style={styles.centered}>
-            <Image source={Images.launch} style={styles.logo}/>
-          </View>
 
           <View style={styles.section}>
-            <Image source={Images.ready}/>
             <Text style={styles.sectionText}>
-              {Config.API_URL ? Config.API_URL : 'null'} This probably isn't what your app is going to look like. Unless your designer handed you this screen and,
-              in that case, congrats! You're ready to ship. For everyone else, this is where you'll see a live preview
-              of your fully functioning app using Ignite.
+              This is sample front screen.
             </Text>
           </View>
+
+          <RoundedButton onPress={this.testButton}>
+            Test button
+          </RoundedButton>
 
           <DevscreensButton/>
         </ScrollView>
       </View>
     )
   }
+
+  testButton () {
+    alert('test')
+  }
 }
+
+// wraps dispatch to create nicer functions to call within our component
+const mapDispatchToProps = (dispatch) => ({
+  navigate: (route) => dispatch(NavigationActions.navigate({routeName: route})),
+})
+
+export default connect(null, mapDispatchToProps)(LaunchScreen)
