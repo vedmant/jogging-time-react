@@ -21,12 +21,6 @@ export const INITIAL_STATE = Immutable({
   username: null,
 })
 
-/* ------------- Selectors ------------- */
-
-export const GithubSelectors = {
-  selectAvatar: state => state.github.avatar,
-}
-
 /* ------------- Reducers ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {

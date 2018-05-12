@@ -17,6 +17,11 @@ const api = apisauce.create({
 })
 
 export default {
+
+  checkLogin: () => api.get('user/me'),
+
+  login: (credentials) => api.post('auth/login', credentials),
+
   getRoot: () => api.get(''),
 
   getRate: () => api.get('rate_limit'),

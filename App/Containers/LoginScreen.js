@@ -3,8 +3,11 @@ import { TextInput, ScrollView, Text, View } from 'react-native'
 import styles from './Styles/LaunchScreenStyles'
 import Fonts from '../Themes/Fonts'
 import RoundedButton from '../Components/RoundedButton'
+import { connect } from 'react-redux'
+import AuthActions from '../Redux/AuthRedux'
+import { NavigationActions } from 'react-navigation'
 
-export default class LoginScreen extends Component {
+class LoginScreen extends Component {
 
   constructor(props) {
     super(props)
@@ -12,6 +15,10 @@ export default class LoginScreen extends Component {
       email: '',
       password: '',
     }
+  }
+
+  onLogin () {
+    this.props.login(this.state)
   }
 
   render () {
@@ -33,20 +40,26 @@ export default class LoginScreen extends Component {
               secureTextEntry={true}
               style={{height: 60, fontSize: 18}}
               placeholder='Password'
-              onChangeText={(passowrd) => this.setState({passowrd})}
+              onChangeText={(password) => this.setState({password})}
             />
           </View>
 
-          <RoundedButton onPress={this.testButton}>
-            Login
-          </RoundedButton>
+          <RoundedButton onPress={() => this.onLogin()}>Login</RoundedButton>
 
         </ScrollView>
       </View>
     )
   }
-
-  testButton () {
-    alert('test')
-  }
 }
+
+const mapStateToProps = (state) => ({
+  me: state.auth.me,
+})
+
+// wraps dispatch to create nicer functions to call within our component
+const mapDispatchToProps = (dispatch) => ({
+  navigate: (route) => dispatch(NavigationActions.navigate({routeName: route})),
+  login: (credentials) => dispatch(AuthActions.login(credentials)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
