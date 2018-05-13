@@ -23,7 +23,7 @@ class LoginScreen extends Component {
 
   onLogin () {
     this.props.login(this.state)
-      // .then(() => alert('ok'))
+      .then(() => alert('ok'))
       .catch(err => this.setState({error: err.response.data}))
   }
 

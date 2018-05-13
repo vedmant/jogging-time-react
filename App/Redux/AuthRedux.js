@@ -36,7 +36,7 @@ export default {
         dispatch({type: 'LOGIN'})
 
         try {
-          const response = axios.post(baseURL + '/auth/login', credentials)
+          const response = yield axios.post(baseURL + '/auth/login', credentials)
           dispatch({type: 'LOGIN_OK', payload: response.data.user})
         } catch (error) {
           dispatch({type: 'LOGIN_FAIL', payload: error.response.data})
