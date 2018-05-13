@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import { StatusBar, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import ReduxNavigation from '../Navigation/ReduxNavigation'
 import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
-import NavigationBar from 'react-native-navbar';
-import AppConfig from '../Config/AppConfig'
-import styles from './Styles/RootContainerStyles'
 import { NavigationActions } from 'react-navigation'
+import { Colors, Fonts, Metrics } from '../Themes'
 
 class RootContainer extends Component {
   componentDidMount () {
@@ -25,16 +23,34 @@ class RootContainer extends Component {
     return (
       <View style={styles.applicationView}>
         {/*<StatusBar barStyle='light-content' />*/}
-        <NavigationBar
-          title={{title: AppConfig.appName}}
-          rightButton={{title: 'Next', handler: () => this.props.navigate('LoginScreen')}}
-          style={{borderBottomWidth: 1, borderBottomColor: '#d3e0e9'}}
-        />
         <ReduxNavigation/>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  applicationView: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: Colors.background,
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    fontFamily: Fonts.type.base,
+    margin: Metrics.baseMargin,
+  },
+  myImage: {
+    width: 200,
+    height: 200,
+    alignSelf: 'center',
+  },
+})
+
 
 // wraps dispatch to create nicer functions to call within our component
 const mapDispatchToProps = (dispatch) => ({

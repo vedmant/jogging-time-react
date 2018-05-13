@@ -6,10 +6,10 @@ import Immutable from 'seamless-immutable'
 const {Types, Creators} = createActions({
   checkLogin: ['username'],
   checkLoginOk: null,
-  checkLoginFail: null,
+  checkLoginFail: ['error'],
   login: ['credentials'],
   loginOk: null,
-  loginFail: null,
+  loginFail: ['error'],
 })
 
 export const AuthTypes = Types
@@ -20,6 +20,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   me: null,
   accessToken: null,
+  loginError: null,
 })
 
 /* ------------- Reducers ------------- */
@@ -30,6 +31,10 @@ export const reducer = createReducer(INITIAL_STATE, {
   },
 
   [Types.LOGIN_OK]: (state, action) => {
-    return state.merge({me: action.user, accessToken: action.accessToken})
+    return state.merge({me: action.user, loginError: null, accessToken: action.accessToken})
+  },
+
+  [Types.LOGIN_FAIL]: (state, action) => {
+    return state.merge({loginError: action.error})
   },
 })

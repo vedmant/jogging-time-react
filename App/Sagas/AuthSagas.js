@@ -19,6 +19,6 @@ export function * login (api, action) {
   if (response.ok) {
     yield put(AuthActions.loginOk(response.data))
   } else {
-    yield put(AuthActions.loginFail())
+    yield put(AuthActions.loginFail(response.data))
   }
 }

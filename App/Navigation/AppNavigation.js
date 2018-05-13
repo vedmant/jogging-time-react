@@ -9,7 +9,7 @@ const PrimaryNav = StackNavigator({
   LoginScreen: {screen: LoginScreen},
 }, {
   // Default config for all screens
-  headerMode: 'none',
+  // headerMode: 'none',
   initialRouteName: 'LaunchScreen',
   navigationOptions: {
     headerStyle: styles.header,

@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-import { TextInput, ScrollView, Text, View } from 'react-native'
-import styles from './Styles/LaunchScreenStyles'
-import Fonts from '../Themes/Fonts'
-import RoundedButton from '../Components/RoundedButton'
+import { View, StyleSheet, Text } from 'react-native'
 import { connect } from 'react-redux'
 import AuthActions from '../Redux/AuthRedux'
 import { NavigationActions } from 'react-navigation'
+import { Button, Card, Icon, FormInput, FormLabel } from 'react-native-elements'
+import { ApplicationStyles, Colors, Fonts } from '../Themes'
 
 class LoginScreen extends Component {
+
+  static navigationOptions = {
+    title: 'Login',
+  }
 
   constructor(props) {
     super(props)
@@ -24,36 +27,62 @@ class LoginScreen extends Component {
   render () {
     return (
       <View style={styles.mainContainer}>
-        <ScrollView style={styles.container}>
+        <View style={styles.content}>
 
           <View style={styles.section}>
-            <Text style={Fonts.style.h2}>Login</Text>
+            <Text style={Fonts.style.normal}>Please type your Email and Password to login</Text>
           </View>
 
-          <View style={styles.inputSection}>
-            <TextInput
-              style={{height: 60, fontSize: 18, marginHorizontal: 0}}
-              placeholder='E-Mail Address'
+          <Card>
+            {this.props.error ?
+              <View style={styles.smallSection}>
+                <Text style={{...Fonts.style.normal, color: '#ff0000'}}>{ this.props.error.message }</Text>
+              </View>
+              : null}
+
+            <FormLabel>Email</FormLabel>
+            <FormInput
+              placeholder='Enter your email'
+              leftIcon={{ type: 'font-awesome', name: 'envelope' }}
               onChangeText={(email) => this.setState({email})}
             />
-            <TextInput
-              secureTextEntry={true}
-              style={{height: 60, fontSize: 18}}
-              placeholder='Password'
+
+            <FormLabel>Password</FormLabel>
+            <FormInput
+              placeholder='Enter your password'
+              leftIcon={{ type: 'font-awesome', name: 'envelope' }}
               onChangeText={(password) => this.setState({password})}
             />
-          </View>
 
-          <RoundedButton onPress={() => this.onLogin()}>Login</RoundedButton>
+            <View style={{marginTop: 20}}>
+              <Button title='Login' onPress={() => this.onLogin()}
+                      fontSize={Fonts.size.regular}
+                      buttonStyle={styles.primaryButton}
+              />
+            </View>
 
-        </ScrollView>
+          </Card>
+
+        </View>
       </View>
     )
   }
 }
 
+const styles = StyleSheet.create({
+  ...ApplicationStyles.screen,
+  form: {
+    marginBottom: 40,
+  },
+  primaryButton: {
+    color: Colors.white,
+    backgroundColor: Colors.primary,
+  },
+})
+
 const mapStateToProps = (state) => ({
   me: state.auth.me,
+  error: state.auth.loginError,
 })
 
 // wraps dispatch to create nicer functions to call within our component

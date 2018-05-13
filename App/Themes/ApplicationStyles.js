@@ -12,6 +12,10 @@ const ApplicationStyles = {
       backgroundColor: Colors.background,
       paddingBottom: 30,
     },
+    content: {
+      marginHorizontal: Metrics.marginHorizontal,
+      marginVertical: Metrics.marginVertical,
+    },
     backgroundImage: {
       position: 'absolute',
       top: 0,
@@ -27,6 +31,10 @@ const ApplicationStyles = {
     section: {
       margin: Metrics.section,
       padding: Metrics.baseMargin,
+    },
+    smallSection: {
+      margin: Metrics.smallMargin,
+      padding: Metrics.smallMargin,
     },
     inputSection: {
       margin: Metrics.section,

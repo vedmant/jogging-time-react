@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import { Image, ScrollView, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import RoundedButton from '../Components/RoundedButton'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
-import styles from './Styles/LaunchScreenStyles'
 import AuthActions from '../Redux/AuthRedux'
+import { ApplicationStyles, Metrics } from '../Themes'
 
 class LaunchScreen extends Component {
+
+  static navigationOptions = {
+    title: 'Home',
+  }
+
   render () {
 
     return (
@@ -37,6 +42,23 @@ class LaunchScreen extends Component {
     this.props.checkLogin()
   }
 }
+
+const styles = StyleSheet.create({
+  ...ApplicationStyles.screen,
+  container: {
+    paddingBottom: Metrics.baseMargin,
+  },
+  logo: {
+    marginTop: Metrics.doubleSection,
+    height: Metrics.images.logo,
+    width: Metrics.images.logo,
+    resizeMode: 'contain',
+  },
+  centered: {
+    alignItems: 'center',
+  },
+})
+
 
 const mapStateToProps = (state) => ({
   me: state.auth.me,
