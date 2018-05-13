@@ -1,40 +1,70 @@
-import { createActions, createReducer } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
+import co from 'co'
+import axios from 'axios'
 
-/* ------------- Types and Action Creators ------------- */
+const baseURL = 'https://jogging-time.vedmant.com/api/v1'
 
-const {Types, Creators} = createActions({
-  checkLogin: ['username'],
-  checkLoginOk: null,
-  checkLoginFail: ['error'],
-  login: ['credentials'],
-  loginOk: null,
-  loginFail: ['error'],
-})
+/* ------------- Types and Action ------------- */
 
-export const AuthTypes = Types
-export default Creators
+export default {
+
+  checkLogin: () => {
+    return (dispatch, getState) => {
+      return co(function* () {
+        dispatch({type: 'CHECK_LOGIN'})
+
+        const {accessToken} = getState()
+        if (! accessToken) {
+          dispatch({type: 'CHECK_LOGIN_FAIL'})
+          throw new Error('No access token stored')
+        }
+
+        try {
+          const response = yield axios.post(baseURL + '/auth/me')
+          dispatch({type: 'CHECK_LOGIN_OK', payload: response.data})
+        } catch (error) {
+          dispatch({type: 'CHECK_LOGIN_FAIL', payload: error.response.data})
+          throw error // Re-throw error so it can be caught from returned promise
+        }
+      })
+    }
+  },
+
+  login: (credentials) => {
+    return (dispatch) => {
+      return co(function* () {
+        dispatch({type: 'LOGIN'})
+
+        try {
+          const response = axios.post(baseURL + '/auth/login', credentials)
+          dispatch({type: 'LOGIN_OK', payload: response.data.user})
+        } catch (error) {
+          dispatch({type: 'LOGIN_FAIL', payload: error.response.data})
+          throw error // Re-throw error so it can be caught from returned promise
+        }
+      })
+    }
+  },
+}
+
 
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
   me: null,
   accessToken: null,
-  loginError: null,
 })
 
-/* ------------- Reducers ------------- */
+export const reducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
 
-export const reducer = createReducer(INITIAL_STATE, {
-  [Types.CHECK_LOGIN_OK]: (state, action) => {
-    return state.merge({me: action})
-  },
+    case 'CHECK_LOGIN_OK':
+      return state.merge({me: action.payload})
 
-  [Types.LOGIN_OK]: (state, action) => {
-    return state.merge({me: action.user, loginError: null, accessToken: action.accessToken})
-  },
+    case 'LOGIN_OK':
+      return state.merge({me: action.payload})
 
-  [Types.LOGIN_FAIL]: (state, action) => {
-    return state.merge({loginError: action.error})
-  },
-})
+    default:
+      return state;
+  }
+}

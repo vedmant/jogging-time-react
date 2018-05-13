@@ -17,11 +17,14 @@ class LoginScreen extends Component {
     this.state = {
       email: '',
       password: '',
+      error: null,
     }
   }
 
   onLogin () {
     this.props.login(this.state)
+      // .then(() => alert('ok'))
+      .catch(err => this.setState({error: err.response.data}))
   }
 
   render () {
@@ -34,9 +37,9 @@ class LoginScreen extends Component {
           </View>
 
           <Card>
-            {this.props.error ?
+            {this.state.error ?
               <View style={styles.smallSection}>
-                <Text style={{...Fonts.style.normal, color: '#ff0000'}}>{ this.props.error.message }</Text>
+                <Text style={{...Fonts.style.normal, color: '#ff0000'}}>{ this.state.error.message }</Text>
               </View>
               : null}
 
@@ -82,7 +85,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   me: state.auth.me,
-  error: state.auth.loginError,
 })
 
 // wraps dispatch to create nicer functions to call within our component
