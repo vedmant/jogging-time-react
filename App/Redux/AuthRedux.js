@@ -1,10 +1,41 @@
 import Immutable from 'seamless-immutable'
 import co from 'co'
 import axios from 'axios'
+import get from 'lodash-es/get'
 
-const baseURL = 'https://jogging-time.vedmant.com/api/v1'
+const baseURL = 'https://running-time.vedmant.com/api/v1'
 
-/* ------------- Types and Action ------------- */
+
+/* ========================================================================= *\
+ * State and Reducers
+\* ========================================================================= */
+
+export const INITIAL_STATE = Immutable({
+  me: null,
+  accessToken: null,
+})
+
+export const reducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+
+    case 'CHECK_LOGIN_OK':
+      return state.merge({me: action.payload})
+
+    case 'LOGIN_OK':
+      return state.merge({me: action.payload.user, accessToken: action.payload.access_token})
+
+    case 'REGISTER_OK':
+      return state.merge({me: action.payload.user, accessToken: action.payload.access_token})
+
+    default:
+      return state;
+  }
+}
+
+
+/* ========================================================================= *\
+ * Actions
+\* ========================================================================= */
 
 export default {
 
@@ -15,8 +46,7 @@ export default {
 
         const {accessToken} = getState()
         if (! accessToken) {
-          dispatch({type: 'CHECK_LOGIN_FAIL'})
-          throw new Error('No access token stored')
+          dispatch({type: 'CHECK_LOGIN_FAIL', payload: 'No access token stored'})
         }
 
         try {
@@ -37,34 +67,28 @@ export default {
 
         try {
           const response = yield axios.post(baseURL + '/auth/login', credentials)
-          dispatch({type: 'LOGIN_OK', payload: response.data.user})
+          dispatch({type: 'LOGIN_OK', payload: response.data})
         } catch (error) {
-          dispatch({type: 'LOGIN_FAIL', payload: error.response.data})
+          dispatch({type: 'LOGIN_FAIL', payload: get(error, 'response.data')})
           throw error // Re-throw error so it can be caught from returned promise
         }
       })
     }
   },
-}
 
+  register: (data) => {
+    return (dispatch) => {
+      return co(function* () {
+        dispatch({type: 'REGISTER'})
 
-/* ------------- Initial State ------------- */
-
-export const INITIAL_STATE = Immutable({
-  me: null,
-  accessToken: null,
-})
-
-export const reducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-
-    case 'CHECK_LOGIN_OK':
-      return state.merge({me: action.payload})
-
-    case 'LOGIN_OK':
-      return state.merge({me: action.payload})
-
-    default:
-      return state;
-  }
+        try {
+          const response = yield axios.post(baseURL + '/auth/register', data)
+          dispatch({type: 'REGISTER_OK', payload: response.data})
+        } catch (error) {
+          dispatch({type: 'REGISTER_FAIL', payload: error.response.data})
+          throw error // Re-throw error so it can be caught from returned promise
+        }
+      })
+    }
+  },
 }

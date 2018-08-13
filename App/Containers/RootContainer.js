@@ -15,10 +15,6 @@ class RootContainer extends Component {
     }
   }
 
-  goNext () {
-    alert('go')
-  }
-
   render () {
     return (
       <View style={styles.applicationView}>

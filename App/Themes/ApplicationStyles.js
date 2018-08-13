@@ -57,7 +57,12 @@ const ApplicationStyles = {
       fontSize: 14,
       color: Colors.text,
     },
+    primaryButton: {
+      color: Colors.white,
+      backgroundColor: Colors.primary,
+    },
   },
+
   darkLabelContainer: {
     padding: Metrics.smallMargin,
     paddingBottom: Metrics.doubleBaseMargin,

@@ -6,13 +6,15 @@ import { NavigationActions } from 'react-navigation'
 import { Button, Card, Icon, FormInput, FormLabel } from 'react-native-elements'
 import { ApplicationStyles, Colors, Fonts } from '../Themes'
 
-class LoginScreen extends Component {
+class RegisterScreen extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
+      name: '',
       email: '',
       password: '',
+      confirm_password: '',
       error: null,
     }
   }
@@ -39,6 +41,13 @@ class LoginScreen extends Component {
               </View>
               : null}
 
+            <FormLabel>Name</FormLabel>
+            <FormInput
+              placeholder='Enter your name'
+              leftIcon={{ type: 'font-awesome', name: 'envelope' }}
+              onChangeText={(name) => this.setState({name})}
+            />
+
             <FormLabel>Email</FormLabel>
             <FormInput
               placeholder='Enter your email'
@@ -52,6 +61,14 @@ class LoginScreen extends Component {
               placeholder='Enter your password'
               leftIcon={{ type: 'font-awesome', name: 'envelope' }}
               onChangeText={(password) => this.setState({password})}
+            />
+
+            <FormLabel>Confirm Password</FormLabel>
+            <FormInput
+              secureTextEntry={true}
+              placeholder='Confirm your password'
+              leftIcon={{ type: 'font-awesome', name: 'envelope' }}
+              onChangeText={(confirm_password) => this.setState({confirm_password})}
             />
 
             <View style={{marginTop: 20}}>
@@ -74,14 +91,10 @@ const styles = StyleSheet.create({
   ...ApplicationStyles.screen,
 })
 
-const mapStateToProps = (state) => ({
-  me: state.auth.me,
-})
-
-// wraps dispatch to create nicer functions to call within our component
-const mapDispatchToProps = (dispatch) => ({
-  navigate: (route) => dispatch(NavigationActions.navigate({routeName: route})),
-  login: (credentials) => dispatch(AuthActions.login(credentials)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(
+  null,
+  dispatch => ({
+    navigate: (route) => dispatch(NavigationActions.navigate({routeName: route})),
+    register: (data) => dispatch(AuthActions.register(data)),
+  })
+)(RegisterScreen)

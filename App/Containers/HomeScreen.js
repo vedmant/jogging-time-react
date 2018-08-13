@@ -6,11 +6,7 @@ import { NavigationActions } from 'react-navigation'
 import AuthActions from '../Redux/AuthRedux'
 import { ApplicationStyles, Metrics } from '../Themes'
 
-class LaunchScreen extends Component {
-
-  static navigationOptions = {
-    title: 'Home',
-  }
+class HomeScreen extends Component {
 
   render () {
 
@@ -70,4 +66,4 @@ const mapDispatchToProps = (dispatch) => ({
   checkLogin: () => dispatch(AuthActions.checkLogin()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LaunchScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
